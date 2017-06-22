@@ -62,13 +62,17 @@ class App extends Component {
 			let xAixData=[];
 			let i=20;
 			data.map(item=>{
-				graphData.push(item.avgresponse);
 				let time=new Date(new Date().getTime()  - (60 * 60*1000) * i);
+				graphData.push([time.toLocaleTimeString(),item.avgresponse]);
+				
 				xAixData.push(`${time.getHours()}:${time.getMinutes()}`);
 				i=i-1;
 			});
 			console.log(graphData);
 			console.log(xAixData);
+			let getpos= function(){
+				return {x:5,y:5};
+			}
 			let config = {
 			  xAxis: {
 			    categories: xAixData
@@ -83,21 +87,35 @@ class App extends Component {
 			  	}
 			  },
 			  series: [{
-			    data: graphData
+			  	name: "avg response time ",
+			    data: graphData,
+			    tooltip: {
+			      valueSuffix: "ms"
+			    }
 			  }],
+			  rangeSelector: {
+			    selected: 1
+			  },
 			  chart: {
-			    "width": "400",
+			    // "width": "600",
 			    "height": "200"
 			  },
-			  plotOptions: {
-			  	line: {
-			  		marker: {
-			  			enabled: false
-			  		}
-			  	}
-			  },
+
+			  // tooltip: {
+			  // 	positioner : {
+			  // 		getpos
+			  // 	}
+			  // },
+			  // plotOptions: {
+			  // 	line: {
+			  // 		marker: {
+			  // 			enabled: false
+			  // 		}
+			  // 	}
+			  // },
 			  title:{
-			  	text: ""
+			  	align:"left",
+			  	text: item.name.toUpperCase()
 			  },
 			  legend: {
 			  	enabled : false
@@ -106,12 +124,9 @@ class App extends Component {
 			console.log(config)
 			return (
 				<li className="row">
-					<div className="col s4">
-						<h6>{item.name.toUpperCase()}</h6>
-					</div>
-					<div className="col s6">
+					
 						<ReactHighcharts config={config} ref={"chart"+id}>{id}</ReactHighcharts>
-					</div>
+					
 				</li>
 				);
 		}
@@ -126,10 +141,11 @@ class App extends Component {
 
 	render() {
 		return (
-			<div style={{width:"500px", marginLeft:"300px"}}>
+			<div className="statusblock">
 				<ul key={this.state.data}>
-				{this.state.checks.map(item =>{return (<div key={item.id}> {this.fetcho(item)} </div>)})}
-
+				<div>
+				{this.state.checks.map(item =>{return (<div className="checkblock" key={item.id}> {this.fetcho(item)} </div>)})}
+				</div>
 				</ul>
 			</div>
 		);
