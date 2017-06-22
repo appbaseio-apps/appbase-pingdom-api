@@ -68,8 +68,8 @@ class App extends Component {
 				xAixData.push(`${time.getHours()}:${time.getMinutes()}`);
 				i=i-1;
 			});
-			console.log(graphData);
-			console.log(xAixData);
+			// console.log(graphData);
+			// console.log(xAixData);
 			let getpos= function(){
 				return {x:5,y:5};
 			}
@@ -98,21 +98,10 @@ class App extends Component {
 			  },
 			  chart: {
 			    // "width": "600",
-			    "height": "200"
+			    "height": "200",
+			    backgroundColor: "",
 			  },
 
-			  // tooltip: {
-			  // 	positioner : {
-			  // 		getpos
-			  // 	}
-			  // },
-			  // plotOptions: {
-			  // 	line: {
-			  // 		marker: {
-			  // 			enabled: false
-			  // 		}
-			  // 	}
-			  // },
 			  title:{
 			  	align:"left",
 			  	text: item.name.toUpperCase()
@@ -121,7 +110,7 @@ class App extends Component {
 			  	enabled : false
 			  } 
 			};
-			console.log(config)
+			// console.log(config)
 			return (
 				<li className="row">
 					
