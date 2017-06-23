@@ -64,8 +64,18 @@ class App extends Component {
 			data.map(item=>{
 				let time=new Date(new Date().getTime()  - (60 * 60*1000) * i);
 				graphData.push([time.toLocaleTimeString(),item.avgresponse]);
+				let ampm="am";
+				let hr=time.getHours();
+				if(hr>12){
+					hr=hr-12;
+					ampm="pm";
+				}
+				else if(hr==0){
+					hr=12;
+					// am
+				}
+				xAixData.push(`${hr} ${ampm}`);
 				
-				xAixData.push(`${time.getHours()}:${time.getMinutes()}`);
 				i=i-1;
 			});
 			// console.log(graphData);
