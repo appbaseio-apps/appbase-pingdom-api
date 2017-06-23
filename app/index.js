@@ -8,7 +8,7 @@ class App extends Component {
 		this.state = {
 			data: {},
 			checks: [],
-			ignore: [] // Checks to be ingored. Note: check name in lowercase
+			ignore: ["scalr frontend up", "scalr es cluster 1 up","scalr pushpin up","scalr es cluster 2 up"] // Checks to be ingored. Note: check name in lowercase
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.request = this.request.bind(this);
